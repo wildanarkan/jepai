@@ -1,4 +1,4 @@
-package com.example.jepai
+package com.jepai.app
 
 import io.flutter.embedding.android.FlutterActivity
 
