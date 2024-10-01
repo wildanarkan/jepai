@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763253012422",
+    "project_id": "jepai-project",
+    "storage_bucket": "jepai-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763253012422:android:ad668cb9df6a6d7124e4c7",
+        "android_client_info": {
+          "package_name": "com.jepai.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPvVmfYG9GQYa1h9kqRVXoJg12oK-bejM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
