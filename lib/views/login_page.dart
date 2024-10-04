@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
             GetStorage().write('isLoggedIn', true);
             Get.offNamed('/home');
           },
-          child: const Text('Login'),
+          child: const Icon(Icons.add_ic_call_outlined),
         ),
       ),
     );
