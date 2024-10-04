@@ -10,8 +10,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () {
-            GetStorage().write('isFirstTime', true);
+          onPressed: () async {
+            await GetStorage().erase();
             Get.offNamed('/introduction');
           },
           child: const Text('LOGOUT'),
