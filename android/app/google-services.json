@@ -12,7 +12,20 @@
           "package_name": "com.jepai.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "763253012422-rbc3rq08o30cgblojqsm3gjugqhbvdal.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jepai.app",
+            "certificate_hash": "17f307799412bf46ae34bea642d0fe40ca8fbe73"
+          }
+        },
+        {
+          "client_id": "763253012422-j1bvm98a1qc2jrqhrn7ji5lp3u0rkkoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBPvVmfYG9GQYa1h9kqRVXoJg12oK-bejM"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763253012422-j1bvm98a1qc2jrqhrn7ji5lp3u0rkkoi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "763253012422-41posbv94cpflqvi7fg1vjsuokde7rqq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jepai"
+              }
+            }
+          ]
         }
       }
     }
