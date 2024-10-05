@@ -1,4 +1,6 @@
 import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +15,11 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String email = '';
   String password = '';
+  String name = ''; // Field untuk nama
 
   Future<void> _registerWithEmail() async {
     try {
@@ -25,7 +29,8 @@ class _RegisterPageState extends State<RegisterPage> {
         password: password,
       );
 
-      // Setelah registrasi berhasil, simpan data pengguna dan navigasi ke halaman home
+      // Setelah registrasi berhasil, simpan data pengguna
+      await _saveUserData(userCredential.user);
       _onRegisterSuccess(userCredential.user);
     } catch (e) {
       log('Error during email registration: $e');
@@ -33,11 +38,22 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  Future<void> _saveUserData(User? user) async {
+    if (user != null) {
+      // Menyimpan data pengguna ke Firestore
+      await _firestore.collection('users').doc(user.uid).set({
+        'name': name,  // Simpan nama
+        'email': user.email,
+        'photoURL': user.photoURL ?? '',
+      });
+    }
+  }
+
   void _onRegisterSuccess(User? user) {
     if (user != null) {
       // Save user data in GetStorage
       GetStorage().write('isLoggedIn', true);
-      GetStorage().write('name', user.displayName ?? 'No Name');
+      GetStorage().write('name', name); // Simpan nama di GetStorage
       GetStorage().write('email', user.email ?? 'No Email');
       GetStorage().write('photoURL', user.photoURL ?? '');
 
@@ -63,6 +79,13 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextField(
+              decoration: const InputDecoration(labelText: 'Name'),
+              onChanged: (value) {
+                name = value; // Simpan nama
+              },
+            ),
+            const SizedBox(height: 16),
             TextField(
               decoration: const InputDecoration(labelText: 'Email'),
               onChanged: (value) {

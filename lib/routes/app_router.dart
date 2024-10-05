@@ -19,6 +19,6 @@ class AppRouter {
     GetPage(name: '/introduction', page: () => const IntroductionPage()),
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/login', page: () =>  const LoginPage()),
-    GetPage(name: '/home', page: () => const HomePage()),
+    GetPage(name: '/home', page: () => HomePage()),
   ];
 }

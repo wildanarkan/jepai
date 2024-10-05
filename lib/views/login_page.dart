@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';  // Tambahkan ini
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,12 +20,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;  // Firestore instance
+
   String email = '';
   String password = '';
 
   Future<void> _signInWithGoogle() async {
     try {
+      // Sign out to allow user to choose a different account
+      await _googleSignIn.signOut();
+
       log('Starting Google Sign In process');
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -67,13 +72,27 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _onLoginSuccess(User? user) {
+  void _onLoginSuccess(User? user) async {
     if (user != null) {
       // Save user data in GetStorage
       GetStorage().write('isLoggedIn', true);
       GetStorage().write('name', user.displayName ?? 'No Name');
       GetStorage().write('email', user.email ?? 'No Email');
       GetStorage().write('photoURL', user.photoURL ?? '');
+
+      // Cek apakah user sudah ada di Firestore
+      final userDoc = _firestore.collection('users').doc(user.uid);
+      final userSnapshot = await userDoc.get();
+
+      if (!userSnapshot.exists) {
+        // Jika user belum ada, simpan data baru ke Firestore
+        userDoc.set({
+          'name': user.displayName ?? 'No Name',
+          'email': user.email,
+          'photoURL': user.photoURL,
+          'createdAt': FieldValue.serverTimestamp(),  // Simpan waktu pembuatan akun
+        });
+      }
 
       // Navigate to home screen
       Get.offNamed('/home');
