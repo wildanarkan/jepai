@@ -26,7 +26,7 @@ class JepaiApp extends StatelessWidget {
     return GetMaterialApp(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: storage.read('isDarkMode') == true ? ThemeMode.dark : ThemeMode.light,
       initialRoute: AppRouter.initialRoute(isFirstTime, isLoggedIn),
       getPages: AppRouter.routes,
     );

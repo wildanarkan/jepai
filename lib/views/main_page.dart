@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 
-import 'home_page.dart';
-import 'profile_page.dart';
+import 'home/home_page.dart';
+import 'profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,7 +12,8 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
   final GetStorage _storage = GetStorage();
   late TabController _tabController;
 
@@ -22,17 +23,26 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
 
-    // Membaca data dari GetStorage
+    // Tambahkan listener untuk mendeteksi perubahan tab
+    _tabController.addListener(() {
+      setState(() {}); // Memperbarui UI saat tab berubah
+    });
+
     String name = _storage.read('name') ?? 'No Name';
     String email = _storage.read('email') ?? 'No Email';
     String photoURL = _storage.read('photoURL') ?? '';
 
-    // Halaman Home dan Profile
     _pages = [
-      const HomePage(), // Halaman Home dipisahkan di file home_page.dart
-      ProfilePage(photoURL: photoURL, name: name, email: email), // Halaman Profile dari file profile_page.dart
+      const HomePage(),
+      const Center(
+        child: Text('Game Page'),
+      ),
+      const Center(
+        child: Text('Achievement Page'),
+      ),
+      ProfilePage(photoURL: photoURL, name: name, email: email),
     ];
   }
 
@@ -44,38 +54,93 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Get current theme
+
     return Scaffold(
       body: TabBarView(
-        controller: _tabController,  // Menghubungkan TabController dengan TabBarView
-        children: _pages,  // Menampilkan halaman sesuai dengan tab yang dipilih
+        controller: _tabController,
+        children: _pages,
       ),
       bottomNavigationBar: GFTabBar(
         isScrollable: false,
-        tabBarColor: Colors.blue,
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.black,
+        tabBarColor: theme.primaryColor,
         tabBarHeight: 50,
-        length: 2, // Sesuai dengan jumlah halaman
-        controller: _tabController, // Menggunakan TabController untuk mengontrol tab
-        tabs: const [
+        indicatorColor: Colors.white,
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorWeight: 1,
+        length: 4,
+        controller: _tabController,
+        tabs: [
           Tab(
             icon: Icon(
-              Icons.directions_bike,
-              size: 20, // Mengubah ukuran ikon
+              Icons.home,
+              color: _tabController.index == 0
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onSurface,
+              size: 20,
             ),
             child: Text(
               "Home",
-              style: TextStyle(fontSize: 9), // Mengubah ukuran font label
+              style: TextStyle(
+                fontSize: 9,
+                color: _tabController.index == 0
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          Tab(
+            icon: Icon(
+              Icons.gamepad,
+              color: _tabController.index == 1
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onSurface,
+              size: 20,
+            ),
+            child: Text(
+              "Game",
+              style: TextStyle(
+                fontSize: 9,
+                color: _tabController.index == 1
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          Tab(
+            icon: Icon(
+              Icons.menu_book_rounded,
+              color: _tabController.index == 2
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onSurface,
+              size: 20,
+            ),
+            child: Text(
+              "Kamus",
+              style: TextStyle(
+                fontSize: 9,
+                color: _tabController.index == 2
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.onSurface,
+              ),
             ),
           ),
           Tab(
             icon: Icon(
               Icons.person,
-              size: 20, // Mengubah ukuran ikon
+              color: _tabController.index == 3
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onSurface,
+              size: 20,
             ),
             child: Text(
               "Profile",
-              style: TextStyle(fontSize: 9), // Mengubah ukuran font label
+              style: TextStyle(
+                fontSize: 9,
+                color: _tabController.index == 3
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.onSurface,
+              ),
             ),
           ),
         ],

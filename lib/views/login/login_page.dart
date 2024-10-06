@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       // Navigate to home screen
-      Get.offNamed('/home');
+      Get.offNamed('/main');
     }
   }
 

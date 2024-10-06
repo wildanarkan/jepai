@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
       GetStorage().write('photoURL', user.photoURL ?? '');
 
       // Navigate to home screen
-      Get.offNamed('/home');
+      Get.offNamed('/main');
     }
   }
 
