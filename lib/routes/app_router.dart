@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:jepai/views/home_page.dart';
 import 'package:jepai/views/introduction_page.dart';
 import 'package:jepai/views/login_page.dart';
+import 'package:jepai/views/main_page.dart';
 import 'package:jepai/views/register_page.dart';
 
 class AppRouter {
@@ -19,6 +19,6 @@ class AppRouter {
     GetPage(name: '/introduction', page: () => const IntroductionPage()),
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/login', page: () =>  const LoginPage()),
-    GetPage(name: '/home', page: () => HomePage()),
+    GetPage(name: '/home', page: () => const MainPage()),
   ];
 }
