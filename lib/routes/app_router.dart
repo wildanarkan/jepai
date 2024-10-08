@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:jepai/views/dictionary/letter_page.dart';
 import 'package:jepai/views/introduction/introduction_page.dart';
 import 'package:jepai/views/login/login_page.dart';
 import 'package:jepai/views/login/register_page.dart';
@@ -27,8 +28,11 @@ class AppRouter {
 
     // PROFILE
     GetPage(name: '/profile/setting', page: () => const SettingPage()),
-    GetPage(name: '/profile/about', page: () => AboutPage()),
-    GetPage(name: '/profile/help', page: () => HelpPage()),
+    GetPage(name: '/profile/about', page: () => const AboutPage()),
+    GetPage(name: '/profile/help', page: () => const HelpPage()),
     GetPage(name: '/profile/feedback', page: () => FeedbackPage()),
+
+    // DICTIANORY
+    GetPage(name: '/dictionary/letters', page: () => const LetterPage()),
   ];
 }

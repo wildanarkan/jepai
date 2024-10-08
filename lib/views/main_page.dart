@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:jepai/views/dictionary/dictionary_page.dart';
 
 import 'home/home_page.dart';
 import 'profile/profile_page.dart';
@@ -39,9 +40,7 @@ class _MainPageState extends State<MainPage>
       const Center(
         child: Text('Game Page'),
       ),
-      const Center(
-        child: Text('Achievement Page'),
-      ),
+      const DictionaryPage(),
       ProfilePage(photoURL: photoURL, name: name, email: email),
     ];
   }
@@ -116,7 +115,7 @@ class _MainPageState extends State<MainPage>
               size: 20,
             ),
             child: Text(
-              "Kamus",
+              "Dictionary",
               style: TextStyle(
                 fontSize: 9,
                 color: _tabController.index == 2
