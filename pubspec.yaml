@@ -19,6 +19,7 @@ dependencies:
   google_sign_in: ^6.2.1
   introduction_screen: ^3.1.14
   getwidget: ^4.0.0
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +30,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/ 
+    - assets/audio/
+    - assets/audio/hiragana/
+    - assets/audio/katakana/
     - assets/images/splash_logo.png
 
 flutter_native_splash:
