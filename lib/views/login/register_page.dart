@@ -45,6 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
         'name': name,  // Simpan nama
         'email': user.email,
         'photoURL': user.photoURL ?? '',
+        'createdAt': FieldValue.serverTimestamp(),
       });
     }
   }
@@ -58,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
       GetStorage().write('photoURL', user.photoURL ?? '');
 
       // Navigate to home screen
-      Get.offNamed('/main');
+      Get.offAllNamed('/main');
     }
   }
 

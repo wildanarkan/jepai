@@ -34,6 +34,7 @@ flutter:
     - assets/audio/
     - assets/audio/hiragana/
     - assets/audio/katakana/
+    - assets/data/
     - assets/images/splash_logo.png
 
 flutter_native_splash:
