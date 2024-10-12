@@ -15,6 +15,8 @@ class _HomePageState extends State<HomePage> {
   final RxInt katakanaProgress = 0.obs;
   final RxInt kanjiProgress = 0.obs;
   final userId = FirebaseAuth.instance.currentUser?.uid;
+  final name = FirebaseAuth.instance.currentUser?.displayName;
+  final photoUrl = FirebaseAuth.instance.currentUser?.photoURL;
 
   @override
   void initState() {
@@ -50,97 +52,190 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: Obx(() => ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              Container(
-                decoration: const BoxDecoration(color: Colors.amber),
-                height: 140,
-                child: Row(
+      body: Obx(
+        () => ListView(
+          padding: const EdgeInsets.all(10),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          const Positioned(
-                            left: 24,
-                            child: Text('Hiragana'),
-                          ),
-                          Center(
-                            child: CircularProgressIndicator(
-                              value: katakanaProgress.value / 9,
-                              backgroundColor: Colors.grey[300],
-                              color: Colors.red,
-                              strokeWidth: 8,
-                              strokeAlign: 5,
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              '${(katakanaProgress.value / 9 * 100).toStringAsFixed(0)}%',
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
+                    if (photoUrl!.isNotEmpty)
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage: NetworkImage(photoUrl!),
+                      )
+                    else
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
+                        child: Icon(
+                          Icons.person,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
                       ),
+                    const SizedBox(
+                      width: 10,
                     ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          const Positioned(
-                            left: 24,
-                            child: Text('Katakana'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Welcome back,',
+                        ),
+                        Text(
+                          '$name',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          Center(
-                            child: CircularProgressIndicator(
-                              value: katakanaProgress.value / 9,
-                              backgroundColor: Colors.grey[300],
-                              color: Colors.red,
-                              strokeWidth: 8,
-                              strokeAlign: 5,
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              '${(katakanaProgress.value / 9 * 100).toStringAsFixed(0)}%',
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          const Positioned(
-                            left: 38,
-                            child: Text('Kanji'),
-                          ),
-                          Center(
-                            child: CircularProgressIndicator(
-                              value: katakanaProgress.value / 9,
-                              backgroundColor: Colors.grey[300],
-                              color: Colors.red,
-                              strokeWidth: 8,
-                              strokeAlign: 5,
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              '${(katakanaProgress.value / 9 * 100).toStringAsFixed(0)}%',
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              )
-            ],
-          )),
+                const Icon(Icons.arrow_forward_ios_rounded)
+              ],
+            ),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+              height: 0,
+              thickness: 0,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Your Progress :',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.greenAccent[100],
+                      borderRadius: BorderRadius.circular(15)),
+                  height: 140,
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            const Positioned(
+                              left: 24,
+                              child: Text(
+                                'Hiragana',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: CircularProgressIndicator(
+                                value: hiraganaProgress.value / 9,
+                                backgroundColor: Colors.grey[300],
+                                color: Colors.amber,
+                                strokeWidth: 8,
+                                strokeAlign: 5,
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                '${(hiraganaProgress.value / 9 * 100).toStringAsFixed(0)}%',
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            const Positioned(
+                              left: 24,
+                              child: Text(
+                                'Katakana',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: CircularProgressIndicator(
+                                value: katakanaProgress.value / 9,
+                                backgroundColor: Colors.grey[300],
+                                color: Colors.red,
+                                strokeWidth: 8,
+                                strokeAlign: 5,
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                '${(katakanaProgress.value / 9 * 100).toStringAsFixed(0)}%',
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            const Positioned(
+                              left: 38,
+                              child: Text(
+                                'Kanji',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: CircularProgressIndicator(
+                                value: kanjiProgress.value / 9,
+                                backgroundColor: Colors.grey[300],
+                                color: Colors.blue,
+                                strokeWidth: 8,
+                                strokeAlign: 5,
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                '${(kanjiProgress.value / 9 * 100).toStringAsFixed(0)}%',
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const Text(
+              'Your Progress :',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ].expand((widget) => [widget, const SizedBox(height: 16)]).toList()
+            ..removeLast(),
+        ),
+      ),
     );
   }
 }
