@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const Text(
-              'Your Progress :',
+              'Games :',
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,

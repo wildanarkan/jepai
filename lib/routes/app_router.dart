@@ -10,6 +10,7 @@ import 'package:jepai/views/profile/help_page.dart';
 import 'package:jepai/views/profile/setting_page.dart';
 import 'package:jepai/views/quest/lesson_page.dart';
 import 'package:jepai/views/quest/quiz_page.dart';
+import 'package:jepai/views/quest/writing_page.dart';
 
 class AppRouter {
   static String initialRoute(bool isFirstTime, bool isLoggedIn) {
@@ -40,5 +41,6 @@ class AppRouter {
     //  QUEST
     GetPage(name: '/quest/lesson', page: () => const LessonPage()),
     GetPage(name: '/quest/quiz', page: () => const QuizPage()),
+    GetPage(name: '/quest/writing', page: () => const WritingPage()),
   ];
 }
