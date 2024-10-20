@@ -68,30 +68,47 @@ class _DictionaryPageState extends State<DictionaryPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                  onTap: () => Get.toNamed('/dictionary/letters', arguments: 'Hiragana'),
+                  onTap: () =>
+                      Get.toNamed('/dictionary/letters', arguments: 'Hiragana'),
                   child: Container(
-                    height: 100,
+                    height: 140,
                     width: 100,
-                    color: Colors.amber,
-                    child: const Center(child: Text('Hiragana')),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage('assets/images/books/hiragana_book.png'),
+                        fit: BoxFit
+                            .cover,),
+                    ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Get.toNamed('/dictionary/letters', arguments: 'Katakana'),
+                  onTap: () =>
+                      Get.toNamed('/dictionary/letters', arguments: 'Katakana'),
                   child: Container(
-                    height: 100,
+                    height: 140,
                     width: 100,
-                    color: Colors.red,
-                    child: const Center(child: Text('Katakana')),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage('assets/images/books/katakana_book.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Get.toNamed('/dictionary/letters', arguments: 'Kanji'),
+                  onTap: () =>
+                      Get.toNamed('/dictionary/letters', arguments: 'Kanji'),
                   child: Container(
-                    height: 100,
+                    height: 140,
                     width: 100,
-                    color: Colors.blue,
-                    child: const Center(child: Text('Kanji')),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/books/kanji_book.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -124,9 +141,10 @@ class _DictionaryPageState extends State<DictionaryPage> {
                             final meaning = entry['senses'][0]
                                     ['english_definitions']
                                 .join(', ');
-                            final partsOfSpeech =
-                                entry['senses'][0]['parts_of_speech'].join(', ');
-        
+                            final partsOfSpeech = entry['senses'][0]
+                                    ['parts_of_speech']
+                                .join(', ');
+
                             return ListTile(
                               title: Text(word),
                               subtitle: Column(

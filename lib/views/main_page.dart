@@ -19,17 +19,14 @@ class _MainPageState extends State<MainPage>
   final GetStorage _storage = GetStorage();
   late TabController _tabController;
 
-  // Daftar halaman yang akan ditampilkan sesuai tab
   late List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-
-    // Tambahkan listener untuk mendeteksi perubahan tab
     _tabController.addListener(() {
-      setState(() {}); // Memperbarui UI saat tab berubah
+      setState(() {});
     });
 
     String name = _storage.read('name') ?? 'No Name';
@@ -52,7 +49,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get current theme
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: TabBarView(

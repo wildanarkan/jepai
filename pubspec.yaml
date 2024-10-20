@@ -38,6 +38,7 @@ flutter:
     - assets/audio/katakana/
     - assets/data/
     - assets/images/splash_logo.png
+    - assets/images/books/
 
 flutter_native_splash:
   color: "#ffffff"
