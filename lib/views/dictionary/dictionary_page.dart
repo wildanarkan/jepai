@@ -16,10 +16,8 @@ class _DictionaryPageState extends State<DictionaryPage> {
   bool _isLoading = false;
   String _error = '';
 
-  // Kontrol untuk mengelola input pencarian
   final TextEditingController _searchController = TextEditingController();
 
-  // Fungsi untuk mengambil data dari Jisho API
   Future<void> searchWord(String query) async {
     setState(() {
       _isLoading = true;
@@ -77,8 +75,8 @@ class _DictionaryPageState extends State<DictionaryPage> {
                       image: DecorationImage(
                         image:
                             AssetImage('assets/images/books/hiragana_book.png'),
-                        fit: BoxFit
-                            .cover,),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -115,16 +113,31 @@ class _DictionaryPageState extends State<DictionaryPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _searchController,
-                onSubmitted: (query) => _performSearch(),
-                decoration: InputDecoration(
-                  hintText: 'Search for a word...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Translate with jisho :',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  TextField(
+                    controller: _searchController,
+                    onSubmitted: (query) => _performSearch(),
+                    decoration: InputDecoration(
+                      hintText: 'Search for a word...',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ]
+                    .expand((widget) => [widget, const SizedBox(height: 8)])
+                    .toList()
+                  ..removeLast(),
               ),
             ),
             _isLoading

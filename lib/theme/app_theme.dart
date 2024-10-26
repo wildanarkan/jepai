@@ -23,6 +23,7 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
+    dividerColor: Colors.grey,
     textTheme: const TextTheme(
       bodySmall: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black),
@@ -49,7 +50,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(Colors.teal),
+        backgroundColor: WidgetStateProperty.all(Colors.blue),
         foregroundColor: WidgetStateProperty.all(Colors.white),
       ),
     ),

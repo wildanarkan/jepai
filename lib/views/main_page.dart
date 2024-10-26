@@ -34,7 +34,7 @@ class _MainPageState extends State<MainPage>
     String photoURL = _storage.read('photoURL') ?? '';
 
     _pages = [
-      const HomePage(),
+      HomePage(name: name, photoUrl: photoURL,),
       const QuestPage(),
       const DictionaryPage(),
       ProfilePage(photoURL: photoURL, name: name, email: email),

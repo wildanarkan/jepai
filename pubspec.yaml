@@ -39,6 +39,7 @@ flutter:
     - assets/data/
     - assets/images/splash_logo.png
     - assets/images/books/
+    - assets/images/logo/
 
 flutter_native_splash:
   color: "#ffffff"

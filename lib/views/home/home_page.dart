@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String name;
+  final String photoUrl;
+
+  const HomePage({super.key, required this.name, required this.photoUrl});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -15,8 +18,6 @@ class _HomePageState extends State<HomePage> {
   final RxInt katakanaProgress = 0.obs;
   final RxInt kanjiProgress = 0.obs;
   final userId = FirebaseAuth.instance.currentUser?.uid;
-  final name = FirebaseAuth.instance.currentUser?.displayName;
-  final photoUrl = FirebaseAuth.instance.currentUser?.photoURL;
 
   @override
   void initState() {
@@ -61,10 +62,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Row(
                   children: [
-                    if (photoUrl!.isNotEmpty)
+                    if (widget.photoUrl.isNotEmpty)
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(photoUrl!),
+                        backgroundImage: NetworkImage(widget.photoUrl),
                       )
                     else
                       CircleAvatar(
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                           'Welcome back,',
                         ),
                         Text(
-                          '$name',
+                          widget.name,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -203,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Center(
                               child: CircularProgressIndicator(
-                                value: kanjiProgress.value / 9,
+                                value: kanjiProgress.value / 6,
                                 backgroundColor: Colors.grey[300],
                                 color: Colors.blue,
                                 strokeWidth: 8,
@@ -212,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Center(
                               child: Text(
-                                '${(kanjiProgress.value / 9 * 100).toStringAsFixed(0)}%',
+                                '${(kanjiProgress.value / 6 * 100).toStringAsFixed(0)}%',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
