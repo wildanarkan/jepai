@@ -14,7 +14,7 @@ class _QuestPageState extends State<QuestPage> {
   final RxInt hiraganaProgress = 0.obs;
   final RxInt katakanaProgress = 0.obs;
   final RxInt kanjiProgress = 0.obs;
-  final RxInt writingProgress = 0.obs;  // New progress for writing
+  final RxInt writingProgress = 0.obs; // New progress for writing
   final userId = FirebaseAuth.instance.currentUser?.uid;
 
   @override
@@ -26,7 +26,8 @@ class _QuestPageState extends State<QuestPage> {
   void _loadProgress() async {
     if (userId != null) {
       try {
-        var userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+        var userDoc =
+            FirebaseFirestore.instance.collection('users').doc(userId);
         var snapshot = await userDoc.get();
         if (snapshot.exists) {
           var data = snapshot.data();
@@ -35,7 +36,8 @@ class _QuestPageState extends State<QuestPage> {
               hiraganaProgress.value = data['hiraganaProgress'] as int? ?? 0;
               katakanaProgress.value = data['katakanaProgress'] as int? ?? 0;
               kanjiProgress.value = data['kanjiProgress'] as int? ?? 0;
-              writingProgress.value = data['writingProgress'] as int? ?? 0;  // Load writing progress
+              writingProgress.value =
+                  data['writingProgress'] as int? ?? 0; // Load writing progress
             });
           }
         } else {
@@ -49,7 +51,12 @@ class _QuestPageState extends State<QuestPage> {
 
   void _handleQuestTap(String type, RxInt progress, int maxProgress) async {
     if (progress.value >= maxProgress) {
-      Get.snackbar('Quest Completed', 'You have already completed this quest!');
+      Get.snackbar(
+        'Quest Completed',
+        'You have already completed this quest!',
+                          colorText: Colors.black,
+
+      );
     } else {
       final result = await Get.toNamed('/quest/lesson', arguments: {
         'type': type,
@@ -74,7 +81,8 @@ class _QuestPageState extends State<QuestPage> {
 
   Future<void> _updateProgress(String type) async {
     if (userId != null) {
-      final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+      final userDoc =
+          FirebaseFirestore.instance.collection('users').doc(userId);
 
       try {
         await FirebaseFirestore.instance.runTransaction((transaction) async {
@@ -113,29 +121,31 @@ class _QuestPageState extends State<QuestPage> {
             padding: const EdgeInsets.all(10),
             children: [
               _buildQuestTile(
-                  title: 'Basic Hiragana',
+                  title: 'あ Basic Hiragana',
                   progress: hiraganaProgress.value,
                   maxProgress: 9,
-                  color: Colors.amber,
-                  onTap: () => _handleQuestTap('Hiragana', hiraganaProgress, 9)),
+                  color: const Color(0xff6e81ce),
+                  onTap: () =>
+                      _handleQuestTap('Hiragana', hiraganaProgress, 9)),
               _buildQuestTile(
-                  title: 'Basic Katakana',
+                  title: 'ア Basic Katakana',
                   progress: katakanaProgress.value,
                   maxProgress: 9,
-                  color: Colors.red,
-                  onTap: () => _handleQuestTap('Katakana', katakanaProgress, 9)),
+                  color: const Color(0xff5b9279),
+                  onTap: () =>
+                      _handleQuestTap('Katakana', katakanaProgress, 9)),
               _buildQuestTile(
-                  title: 'Basic Kanji',
+                  title: '字 Basic Kanji',
                   progress: kanjiProgress.value,
                   maxProgress: 6,
-                  color: Colors.blue,
+                  color: const Color(0xfff0c808),
                   onTap: () => _handleQuestTap('Kanji', kanjiProgress, 6)),
-              _buildQuestTile(
-                  title: 'Writing Practice',
-                  progress: writingProgress.value,
-                  maxProgress: 10,
-                  color: Colors.green,
-                  onTap: _handleWritingTap),
+              // _buildQuestTile(
+              //     title: 'Writing Practice',
+              //     progress: writingProgress.value,
+              //     maxProgress: 10,
+              //     color: Colors.green,
+              //     onTap: _handleWritingTap),
             ].expand((widget) => [widget, const SizedBox(height: 16)]).toList()
               ..removeLast(),
           )),
@@ -162,13 +172,29 @@ class _QuestPageState extends State<QuestPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title),
-                Text('$progress/$maxProgress'),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$progress/$maxProgress',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
               ],
             ),
             progress >= maxProgress
-                ? const Icon(Icons.check_circle)
-                : const Icon(Icons.arrow_forward_rounded)
+                ? const Icon(
+                    Icons.check_circle,
+                    color: Colors.white,
+                  )
+                : const Icon(Icons.arrow_forward_rounded, color: Colors.white)
           ],
         ),
       ),

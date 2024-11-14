@@ -17,7 +17,8 @@ class FeedbackPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('We value your feedback!', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text('We value your feedback!',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             TextField(
               controller: _feedbackController,
@@ -31,7 +32,11 @@ class FeedbackPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Simpan atau kirim feedback
-                Get.snackbar('Feedback', 'Thank you for your feedback!');
+                Get.snackbar(
+                  'Feedback',
+                  'Thank you for your feedback!',
+                  colorText: Colors.black,
+                );
               },
               child: const Text('Submit'),
             ),

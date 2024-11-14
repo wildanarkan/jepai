@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                               child: CircularProgressIndicator(
                                 value: hiraganaProgress.value / 9,
                                 backgroundColor: Colors.grey[300],
-                                color: Colors.amber,
+                                color: const Color(0xff6e81ce),
                                 strokeWidth: 8,
                                 strokeAlign: 5,
                               ),
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                               child: CircularProgressIndicator(
                                 value: katakanaProgress.value / 9,
                                 backgroundColor: Colors.grey[300],
-                                color: Colors.red,
+                                color: const Color(0xff5b9279),
                                 strokeWidth: 8,
                                 strokeAlign: 5,
                               ),
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                               child: CircularProgressIndicator(
                                 value: kanjiProgress.value / 6,
                                 backgroundColor: Colors.grey[300],
-                                color: Colors.blue,
+                                color: const Color(0xfff0c808),
                                 strokeWidth: 8,
                                 strokeAlign: 5,
                               ),
@@ -226,13 +226,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            const Text(
-              'Games :',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            // const Text(
+            //   'Games :',
+            //   style: TextStyle(
+            //     fontSize: 17,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
           ].expand((widget) => [widget, const SizedBox(height: 16)]).toList()
             ..removeLast(),
         ),

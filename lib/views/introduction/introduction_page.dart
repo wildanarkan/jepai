@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class IntroductionPage extends StatelessWidget {
   const IntroductionPage({super.key});
@@ -11,21 +12,24 @@ class IntroductionPage extends StatelessWidget {
     return IntroductionScreen(
       pages: [
         PageViewModel(
-          title: "Selamat Datang",
-          body: "Ini adalah aplikasi pembelajaran bahasa yang inovatif.",
+          title: "Welcome To JEPAI",
+          body: "This is an innovative Japanese language learning app.",
           image: Image.asset("assets/images/splash_logo.png"),
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: "Fitur Utama",
-          body: "Jelajahi fitur-fitur menarik yang kami tawarkan.",
-          image: Image.asset("assets/images/splash_logo.png"),
+          title: "The Features",
+          body: "Explore the exciting features we offer.",
+          image: Image.asset("assets/images/books/books_jepai.png"),
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: "Mulai Sekarang",
-          body: "Mari kita mulai perjalanan belajar Anda!",
-          image: Image.asset("assets/images/splash_logo.png"),
+          title: "Let's start now",
+          body: "Let's start your learning journey!",
+          image: Lottie.asset(
+            "assets/images/lotties/flying_bear.json",
+            fit: BoxFit.cover,
+          ),
           decoration: getPageDecoration(),
         ),
       ],
@@ -36,7 +40,10 @@ class IntroductionPage extends StatelessWidget {
       showSkipButton: true,
       showBottomPart: true,
       skip: const Text("Skip"),
-      next: const Icon(Icons.arrow_forward_rounded, size: 30,),
+      next: const Icon(
+        Icons.arrow_forward_rounded,
+        size: 30,
+      ),
       done: const Text("Start"),
       dotsDecorator: const DotsDecorator(
           // activeColor: Colors.black,
