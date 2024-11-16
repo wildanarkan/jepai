@@ -91,7 +91,8 @@ class ProfilePage extends StatelessWidget {
                         onTap: () async {
                           await FirebaseAuth.instance.signOut();
                           await storage.erase();
-                          Get.offAllNamed('/introduction');
+                          await storage.write('isFirstTime', false);
+                          Get.offAllNamed('/login');
                         },
                         iconColor: iconColor,
                         textColor: textColor,
